@@ -10,3 +10,23 @@
  *    --> Finalement, vous décidez de supprimer complètement la table
  *    --> Et pour finir, comme vous n'avez plus de table dans la base de données, vous décidez de supprimer aussi la base de données.
  */
+
+require __DIR__ . '/Classes/Config.php';
+require __DIR__ . '/Classes/DBSingleton.php';
+
+$pdo = DBSingleton::PDO();
+
+$sql = "DELETE FROM user ORDER BY ID DESC LIMIT 1";
+
+$pdo->exec($sql);
+
+/**
+ * Théorie
+ * --------
+ * Pour obtenir l'ID du dernier élément inséré en base de données, vous pouvez utiliser la méthode: $bdd->lastInsertId()
+ *
+ * $result = $bdd->execute();
+ * if($result) {
+ *     $id = $bdd->lastInsertId();
+ * }
+ */
