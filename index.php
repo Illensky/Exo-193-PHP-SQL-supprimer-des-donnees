@@ -15,11 +15,62 @@ require __DIR__ . '/Classes/Config.php';
 require __DIR__ . '/Classes/DBSingleton.php';
 
 $pdo = DBSingleton::PDO();
-
+/*
+ * 1.Delete last user
 $sql = "DELETE FROM user ORDER BY ID DESC LIMIT 1";
 
 $pdo->exec($sql);
+*/
 
+/*
+ * 2.Trunc table
+$sql = "TRUNCATE TABLE user";
+
+$pdo->exec($sql);
+*/
+
+/*
+ * 3.add one user
+$stm = $pdo->prepare("
+        INSERT INTO user (nom, prenom, rue, numero, code_postal, ville, pays, mail)
+        VALUES (:nom, :prenom, :rue, :numero, :code_postal, :ville, :pays, :mail)
+    ");
+
+$nom = 'Laroche';
+$prenom = 'Alexis';
+$rue = 'Rue d\'hirson';
+$numero = 3;
+$code_postal = '02830';
+$ville = 'Saint-Michel';
+$pays = 'France';
+$mail = 'alexis.laroche.02240@gmail.com';
+
+$stm->bindParam(':nom', $nom);
+$stm->bindParam(':prenom', $prenom);
+$stm->bindParam(':rue', $rue);
+$stm->bindParam(':numero', $numero);
+$stm->bindParam(':code_postal', $code_postal);
+$stm->bindParam(':ville', $ville);
+$stm->bindParam(':pays', $pays);
+$stm->bindParam(':mail', $mail);
+
+$stm->execute();
+*/
+
+/*
+ * 4. drop a complete table
+$sql = "DROP TABLE user";
+
+$pdo->exec($sql);
+*/
+
+
+/*
+ * 5. Drop the complete database
+$sql = "DROP DATABASE exo_193";
+
+$pdo->exec($sql);
+*/
 /**
  * Théorie
  * --------
